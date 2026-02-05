@@ -1,0 +1,62 @@
+# Source
+
+arm
+; Offset: 0x009CBE5C
+
+SUB SP, SP, #0xC00
+STP X29, X30, [SP]
+STP S0, S1, [SP,#0x10]
+STR D0, [SP,#0x20]
+LDR X25, [X8,#0x38]
+ADD X22, SP, #0xC08
+MOV X0, X21
+BL #0x21A0F4 ; LivingEntity::getHealth
+FMOV S1, S0
+MOV X0, X21
+BL #0x2D1900 ; Player::getAbsorptionAmount (sort of works on other entities? it bugs out sometimes)
+FADD S0, S0, S1
+FCVT D0, S0
+LDR W0, [X22,#4]
+CBNZ W0, #0x9CBEB4
+ADD X0, SP, #0x50
+LDP X2, X1, [X22,#0x8]
+MOV X23, X0
+LSL X2, X2, #2
+BL #0x9C9C38 ; memcpy
+B #0x9CBEEC
+ADD X23, SP, #0x50
+ADD X1, X22, #4
+MOV X2, XZR
+ADD X2, X2, #1
+LDR W0, [X1,X2,LSL#2]
+CBNZ W0, #0x9CBEC0
+MOV X24, X2
+LSL X2, X2, #2
+MOV X0, X23
+BL #0x9C9C38 ; memcpy
+MOV X0, #9
+STR X0, [X22]
+STR X24, [X22,#8]
+MOV X0, X23
+LDR X2, [X22,#0x8]
+ADD X0, X0, X2, LSL #2
+STR WZR, [X0]
+MOV W1, #0x100
+ADRP X2, #0xD5E000 ; HP string that gets appended to the name
+ADD X2, X2, #0xE8
+BL #0x9C9C58 ; swprintf
+LDR W1, [X22,#0x8]
+ADD W0, W1, W0
+STR W0, [X22,#0x8]
+STR X23, [X22,#0x10]
+MOV X8, X25
+LDR D0, [SP,#0x20]
+LDP S0, S1, [SP,#0x10]
+LDP X29, X30, [SP]
+ADD SP, SP, #0xC00
+RET
+
+
+Offset: 0x00D5E0E8
+
+00000020 0000005B 00000025 0000002E 00000032 00000066 0000005D 00000000 | [%.2f]
