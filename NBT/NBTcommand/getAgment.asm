@@ -1,0 +1,29 @@
+0x52B780 ; void getArgment(start, getKey)
+SUB SP, SP, #0x40
+STP X19, X20, [SP,#0x10]
+STP X21, X22, [SP,#0x20]
+STP X29, X30, [SP,#0x30]
+ADD X29, SP, #0x30
+MOV X19, X0
+MOV X20, X1
+MOV X8, X19
+MOV X9, X19
+MOV X21, XZR
+LDR W0, [X8] <= _reLoop
+ADD X8, X8, #0x4
+CBNZ W0, _reLoop
+MOV X0, X9
+MOV X9, X8
+ADD X21, X21, #1
+CMP X21, X20
+B.EQ _THEEND
+LDR W1, [X8] 
+CBNZ W1, _reLoop
+MOV X0, XZR
+LDP X19, X20, [SP,#0x10] <= _THEEND
+LDP X21, X22, [SP,#0x20]
+LDP X29, X30, [SP,#0x30]
+ADD SP, SP, #0x40
+RET
+
+/nbt e 1 1
