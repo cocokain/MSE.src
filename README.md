@@ -2,11 +2,11 @@
 
 > [!CAUTION]
 > 🇯🇵-
-> これらのコード・ソースコードの二次配布のしないでください。主に自分で作ったものを掲載してますが元が他人のものもあります(確認済み)。
+> これらのコード・ソースコードの**二次配布**をしないでください。主に自分で作ったものを掲載してますが元が他人のものもあります(確認済み)。
 > チートコード化をしたいのであれば[ASM変換](https://cocokain.github.io/Assembly-Converter/)を利用してください。
 >
 > 🇺🇸-
-> Please do not redistribute these codes or source codes. I mainly post the ones I created myself, but some are from other sources (confirmed). If you want to turn them into cheat codes, please use [ASMConverter](https://cocokain.github.io/Assembly-Converter/).
+> **Please do not redistribute these codes or source codes**. I mainly post the ones I created myself, but some are from other sources (confirmed). If you want to turn them into **cheat codes**, please use [ASMConverter](https://cocokain.github.io/Assembly-Converter/).
 
 # NBTid
 
