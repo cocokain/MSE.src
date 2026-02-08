@@ -10,9 +10,6 @@ ORR W1, WZR, #0xFF ; blue
 0x68B0DC ; Eye
 ORR W1, WZR, #0xFF0000
 
-0x68AF384 ; 0 or 1
-MOVZ W0, #1
-
 ------------------------------------
 0x68B47C ; ESP
 FCVT S0, D4
