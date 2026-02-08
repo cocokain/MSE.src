@@ -1,0 +1,6 @@
+0x238D0 ; OFFHAND
+MOVZ W19, #1
+
+0x1B4EF8 ; Equip Everythings
+NOP
+MOVZ W0, #1
