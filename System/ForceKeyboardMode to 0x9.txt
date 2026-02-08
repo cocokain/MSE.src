@@ -1,0 +1,4 @@
+LanguageSet2Latin.
+
+[ForceKeyboardMode to 0x9]
+04000000 00790BA4 52800120
