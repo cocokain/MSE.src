@@ -1,0 +1,2 @@
+0x699990 ; DashFov
+FMOV S0, #1.0
