@@ -1,0 +1,3 @@
+CraftEverything対策
+[AntiCraft]
+04000000 000F1748 D65F03C0
