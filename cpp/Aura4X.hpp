@@ -986,4 +986,5 @@ FORCE_INLINE void Kaura4X::kaura(){
         target                  = nullptr;
         buttonFlag              = ButtonFlag::none;
     }
+
 }
