@@ -1,0 +1,83 @@
+0x1871000:
+"[InstanCraft] Crafted Successfully"
+
+0x562994: ; Achievement menu
+BL 0x569130
+B 0x562E5C
+
+0x569130 ; InstantCraft(enableSound)
+SUB SP, SP, #0x40
+STP X20, X19, [SP,#0x20]
+STP X29, X30, [SP,#0x30]
+ADD X29, SP, #0x30 
+mov W0, #0x9e
+BL _CraftFunction
+mov W0, #0x9f
+BL _CraftFunction
+mov W0, #0xa0
+BL _CraftFunction
+mov W0, #0xa1
+BL _CraftFunction
+mov W20, #0x40
+sub W20, W20, #1 <= _CraftGappleLoop
+mov W0, #0x24
+BL _CraftFunction
+CBNZ W20, _CraftGappleLoop
+mov W0, #0x184
+BL _CraftFunction
+mov W0, #0x15E
+BL _CraftFunction
+mov W20, #8
+sub W20, W20, #1 <= _CraftArrowLoop
+mov W0, #0x180
+BL _CraftFunction
+CBNZ W20, _CraftArrowLoop
+BL 0x67DB90 ; mc::Minecraft::getInstance();
+CBZ X0, _SkipSound
+LDR X19, [X0, #0x58] ; instance->LocalPlayer
+CBZ X19, _SkipSound
+ADRP X8, #0x17A3000
+ADD X8, X8, #0x358
+LDR X1, [X8] ; SoundEvent::Opening_EnderChest
+MOV X0, X19
+FMOV S0, 5 ; volume
+FMOV S1, 1 ; pitch
+BL 0x6CEF10 ; LocalPlayer::playSound(SoundEvent const*, float, float)
+ADRP X0, #0x1871000 <=_SkipSound ; "[InstantCraft] Crafted Successfully"
+ADD X1, X0, #0x100
+BL 0x521340 ; wstring Wchar2Wstring(wchat_t const*, temp)
+BL 0x6A2A10 ; wstring mcprintf(std::wstring const&):
+BL 0x9C9AA8 ; std::wstring::~wstring(void)
+LDP X29, X30, [SP,#0x30]
+LDP X20, X19, [SP,#0x20]
+ADD SP, SP, #0x40
+RET
+SUB SP, SP, #0x40 <= _CraftFunction ; void craft(int craftID)
+STP X20, X19, [SP,#0x20]
+STP X29, X30, [SP,#0x30]
+ADD X29, SP, #0x30 
+MOV W20, W0 
+BL 0x67DB90 ; mc::Minecraft::getInstance();
+MOV W1,0
+BL 0x6E019C ; Minecraft::getConnection(int)
+MOV X19,X0
+MOV W0, #0x60 ;
+BL 0x9C9A78 ; _Znwm_0 ; operator new(ulong)
+MOV W1, W20
+MOV W2, WZR
+MOV W3, WZR
+MOV X20, X0
+BL 0xF1534 ; mc::CraftItemPacket(int,int,int)
+ADD X0, SP, #0x10
+MOV X1, X20
+MOV X2, XZR
+BL 0x29DD3C ; ???
+ADD X1, SP, #0x10
+MOV X0, X19 ; getInstance->getconnection(0);
+BL 0x5BF198 ; ClientPacketListener::send(std::shared_ptr<Packet>)
+ADD X0, SP, #0x10
+BL 0x293C8
+LDP X29, X30, [SP,#0x30]
+LDP X20, X19, [SP,#0x20]
+ADD SP, SP, #0x40
+RET
